@@ -1,0 +1,94 @@
+rules_version = '2';
+
+// The phone reads only what its user may see and writes almost nothing.
+// Orders, statuses and roles change only through Cloud Functions.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isOwner() { return signedIn() && request.auth.token.get('owner', false) == true; }
+    function isSelf(uid) { return signedIn() && request.auth.uid == uid; }
+    function me() { return get(/databases/$(database)/documents/users/$(request.auth.uid)); }
+    function isApproved() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && me().data.status == 'approved';
+    }
+    function text(v, minLen, maxLen) { return v is string && v.size() >= minLen && v.size() <= maxLen; }
+    function onlyChanges(keys) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(keys);
+    }
+    function stampedNow() { return request.resource.data.updatedAt == request.time; }
+
+    match /users/{uid} {
+      allow read: if isOwner() || isSelf(uid);
+      // Created by registerProfile. Approved customers may fix their name and address.
+      allow update: if isSelf(uid) && isApproved()
+        && onlyChanges(['firstName', 'lastName', 'address'])
+        && text(request.resource.data.firstName, 1, 50)
+        && text(request.resource.data.lastName, 1, 50)
+        && request.resource.data.address.keys().hasOnly(['line1', 'line2', 'landmark', 'city', 'state', 'pincode'])
+        && text(request.resource.data.address.line1, 3, 120)
+        && text(request.resource.data.address.city, 2, 60)
+        && text(request.resource.data.address.state, 2, 60)
+        && request.resource.data.address.pincode.matches('^[1-9][0-9]{5}$');
+
+      match /devices/{token} {
+        allow read, delete: if isSelf(uid);
+        allow create, update: if isSelf(uid)
+          && request.resource.data.keys().hasOnly(['platform', 'updatedAt'])
+          && request.resource.data.platform in ['android']
+          && stampedNow();
+      }
+    }
+
+    match /categories/{id} {
+      allow read: if isApproved() || isOwner();
+      allow write: if isOwner()
+        && (request.resource == null || (text(request.resource.data.name, 1, 60) && stampedNow()));
+    }
+
+    match /products/{id} {
+      allow read: if isApproved() || isOwner();
+      allow write: if isOwner()
+        && (request.resource == null || (
+          text(request.resource.data.name, 1, 80)
+          && request.resource.data.categoryId is string
+          && request.resource.data.sellModes is list
+          && request.resource.data.sellModes.size() >= 1
+          && request.resource.data.sellModes.size() <= 3
+          && request.resource.data.inStock is bool
+          && request.resource.data.active is bool
+          && stampedNow()));
+    }
+
+    match /carts/{uid} {
+      allow read, delete: if isSelf(uid) && isApproved();
+      allow create, update: if isSelf(uid) && isApproved()
+        && request.resource.data.keys().hasOnly(['items', 'updatedAt'])
+        && request.resource.data.items is list
+        && request.resource.data.items.size() <= 100
+        && stampedNow();
+    }
+
+    match /orders/{id} {
+      allow read: if isOwner() || (isApproved() && resource.data.uid == request.auth.uid);
+      allow write: if false;
+    }
+
+    match /auditLog/{id} {
+      allow read: if isOwner();
+      allow write: if false;
+    }
+
+    match /counters/{id} {
+      allow read: if isOwner();
+      allow write: if false;
+    }
+
+    match /settings/{id} {
+      allow read: if signedIn();
+      allow write: if isOwner();
+    }
+  }
+}

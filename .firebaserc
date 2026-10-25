@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "kamal-bhandar-test",
+    "test": "kamal-bhandar-test",
+    "live": "kamal-bhandar"
+  }
+}

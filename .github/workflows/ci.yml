@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  functions:
+    name: Server functions
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: functions
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+
+  rules:
+    name: Security rules
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rules-tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: rules-tests/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: npm ci
+      - run: npm test
+
+  app:
+    name: Android app
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.8
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      # The APK needs the Firebase config for a real project. Add it as the
+      # GOOGLE_SERVICES_JSON secret (see docs/SETUP.md) to get a test build here.
+      - name: Build test APK
+        if: ${{ env.GOOGLE_SERVICES_JSON != '' }}
+        run: |
+          echo "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
+          flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('app/build/app/outputs/flutter-apk/app-release.apk') != '' }}
+        with:
+          name: kamal-bhandar-test-apk
+          path: app/build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 14

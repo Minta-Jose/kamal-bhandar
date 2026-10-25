@@ -1,0 +1,463 @@
+{
+ "note": "Prices are placeholders in paise; the owner sets real prices in the app.",
+ "categories": [
+  {
+   "id": "rice",
+   "name": "Rice",
+   "nameHi": "चावल",
+   "products": [
+    {
+     "id": "basmati-rice",
+     "name": "Basmati rice",
+     "nameHi": "बासमती चावल",
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 12000
+      },
+      {
+       "mode": "bag",
+       "min": 1,
+       "step": 1,
+       "max": 20,
+       "bagSizeKg": 50,
+       "pricePaise": 550000
+      }
+     ]
+    },
+    {
+     "id": "sona-masoori-rice",
+     "name": "Sona masoori rice",
+     "nameHi": "सोना मसूरी चावल",
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 6000
+      },
+      {
+       "mode": "bag",
+       "min": 1,
+       "step": 1,
+       "max": 20,
+       "bagSizeKg": 50,
+       "pricePaise": 280000
+      }
+     ]
+    },
+    {
+     "id": "gobindobhog-rice",
+     "name": "Gobindobhog rice",
+     "nameHi": "गोबिंदभोग चावल",
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 11000
+      },
+      {
+       "mode": "bag",
+       "min": 1,
+       "step": 1,
+       "max": 20,
+       "bagSizeKg": 25,
+       "pricePaise": 250000
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "atta",
+   "name": "Atta and flours",
+   "nameHi": "आटा",
+   "products": [
+    {
+     "id": "wheat-atta",
+     "name": "Wheat atta",
+     "nameHi": "गेहूं का आटा",
+     "keywords": [
+      "chakki",
+      "wheat flour"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 500,
+       "step": 500,
+       "max": 25000,
+       "pricePaise": 4500
+      },
+      {
+       "mode": "bag",
+       "min": 1,
+       "step": 1,
+       "max": 20,
+       "bagSizeKg": 10,
+       "pricePaise": 42000
+      }
+     ]
+    },
+    {
+     "id": "besan",
+     "name": "Besan",
+     "nameHi": "बेसन",
+     "keywords": [
+      "gram flour"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 11000
+      }
+     ]
+    },
+    {
+     "id": "maida",
+     "name": "Maida",
+     "nameHi": "मैदा",
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 5000
+      }
+     ]
+    },
+    {
+     "id": "suji",
+     "name": "Suji",
+     "nameHi": "सूजी",
+     "keywords": [
+      "rava",
+      "semolina"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 5500
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dal",
+   "name": "Dal and pulses",
+   "nameHi": "दाल",
+   "products": [
+    {
+     "id": "toor-dal",
+     "name": "Toor dal",
+     "nameHi": "अरहर दाल",
+     "keywords": [
+      "arhar",
+      "tuvar"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 16000
+      }
+     ]
+    },
+    {
+     "id": "moong-dal",
+     "name": "Moong dal",
+     "nameHi": "मूंग दाल",
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 13000
+      }
+     ]
+    },
+    {
+     "id": "masoor-dal",
+     "name": "Masoor dal",
+     "nameHi": "मसूर दाल",
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 11000
+      }
+     ]
+    },
+    {
+     "id": "chana-dal",
+     "name": "Chana dal",
+     "nameHi": "चना दाल",
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 10000
+      }
+     ]
+    },
+    {
+     "id": "rajma",
+     "name": "Rajma",
+     "nameHi": "राजमा",
+     "keywords": [
+      "kidney beans"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 15000
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "spices",
+   "name": "Spices",
+   "nameHi": "मसाले",
+   "products": [
+    {
+     "id": "turmeric-powder",
+     "name": "Turmeric powder",
+     "nameHi": "हल्दी",
+     "keywords": [
+      "haldi"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 25,
+       "step": 25,
+       "max": 2000,
+       "pricePaise": 30000
+      }
+     ]
+    },
+    {
+     "id": "red-chilli-powder",
+     "name": "Red chilli powder",
+     "nameHi": "लाल मिर्च",
+     "keywords": [
+      "mirchi"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 25,
+       "step": 25,
+       "max": 2000,
+       "pricePaise": 36000
+      }
+     ]
+    },
+    {
+     "id": "cumin",
+     "name": "Cumin seeds",
+     "nameHi": "जीरा",
+     "keywords": [
+      "jeera"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 25,
+       "step": 25,
+       "max": 2000,
+       "pricePaise": 60000
+      }
+     ]
+    },
+    {
+     "id": "garam-masala",
+     "name": "Garam masala",
+     "nameHi": "गरम मसाला",
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 25,
+       "step": 25,
+       "max": 1000,
+       "pricePaise": 80000
+      },
+      {
+       "mode": "piece",
+       "min": 1,
+       "step": 1,
+       "max": 20,
+       "pricePaise": 9000
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "oil",
+   "name": "Oil and ghee",
+   "nameHi": "तेल और घी",
+   "products": [
+    {
+     "id": "mustard-oil",
+     "name": "Mustard oil 1 L",
+     "nameHi": "सरसों का तेल",
+     "keywords": [
+      "sarson"
+     ],
+     "sellModes": [
+      {
+       "mode": "piece",
+       "min": 1,
+       "step": 1,
+       "max": 24,
+       "pricePaise": 18000
+      }
+     ]
+    },
+    {
+     "id": "sunflower-oil",
+     "name": "Sunflower oil 1 L",
+     "nameHi": "सूरजमुखी तेल",
+     "sellModes": [
+      {
+       "mode": "piece",
+       "min": 1,
+       "step": 1,
+       "max": 24,
+       "pricePaise": 16000
+      }
+     ]
+    },
+    {
+     "id": "desi-ghee",
+     "name": "Desi ghee 500 ml",
+     "nameHi": "देसी घी",
+     "sellModes": [
+      {
+       "mode": "piece",
+       "min": 1,
+       "step": 1,
+       "max": 12,
+       "pricePaise": 32000
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sugar-salt",
+   "name": "Sugar, salt and jaggery",
+   "nameHi": "चीनी, नमक, गुड़",
+   "products": [
+    {
+     "id": "sugar",
+     "name": "Sugar",
+     "nameHi": "चीनी",
+     "keywords": [
+      "chini"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 500,
+       "step": 500,
+       "max": 25000,
+       "pricePaise": 4800
+      },
+      {
+       "mode": "bag",
+       "min": 1,
+       "step": 1,
+       "max": 20,
+       "bagSizeKg": 50,
+       "pricePaise": 240000
+      }
+     ]
+    },
+    {
+     "id": "salt",
+     "name": "Iodised salt 1 kg",
+     "nameHi": "नमक",
+     "sellModes": [
+      {
+       "mode": "piece",
+       "min": 1,
+       "step": 1,
+       "max": 20,
+       "pricePaise": 2800
+      }
+     ]
+    },
+    {
+     "id": "jaggery",
+     "name": "Jaggery",
+     "nameHi": "गुड़",
+     "keywords": [
+      "gur",
+      "gud"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 250,
+       "step": 250,
+       "max": 25000,
+       "pricePaise": 7000
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tea",
+   "name": "Tea and beverages",
+   "nameHi": "चाय",
+   "products": [
+    {
+     "id": "loose-tea",
+     "name": "Loose tea",
+     "nameHi": "चाय पत्ती",
+     "keywords": [
+      "chai"
+     ],
+     "sellModes": [
+      {
+       "mode": "weight",
+       "min": 100,
+       "step": 100,
+       "max": 5000,
+       "pricePaise": 50000
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

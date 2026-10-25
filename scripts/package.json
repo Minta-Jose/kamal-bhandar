@@ -1,0 +1,9 @@
+{
+  "name": "kamal-bhandar-scripts",
+  "private": true,
+  "type": "module",
+  "description": "One-off admin scripts. Run with a service account key; see docs/SETUP.md.",
+  "dependencies": {
+    "firebase-admin": "^14.5.0"
+  }
+}

@@ -1,0 +1,25 @@
+rules_version = '2';
+
+// Photos are uploaded only by the owner: images under 2 MB.
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isOwner() { return request.auth != null && request.auth.token.get('owner', false) == true; }
+    function isApproved() {
+      return request.auth != null
+        && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.status == 'approved';
+    }
+    function goodImage() {
+      return request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    match /products/{productId}/{file} {
+      allow read: if isOwner() || isApproved();
+      allow write: if isOwner() && (request.resource == null || goodImage());
+    }
+    match /categories/{file} {
+      allow read: if isOwner() || isApproved();
+      allow write: if isOwner() && (request.resource == null || goodImage());
+    }
+  }
+}

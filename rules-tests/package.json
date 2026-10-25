@@ -1,0 +1,14 @@
+{
+  "name": "kamal-bhandar-rules-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "firebase --config ../firebase.json emulators:exec --only firestore,storage --project demo-kamal-bhandar \"vitest run\""
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
+    "firebase": "^12.19.0",
+    "firebase-tools": "^15.34.1",
+    "vitest": "^5.0.5"
+  }
+}
